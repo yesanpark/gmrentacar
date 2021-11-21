@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fireworks</title>
+    <link rel="stylesheet" href="firework.css">
+    
+   <style>
+       
+   body{
+  background:#1560bd;
+  margin:0;
+  width:100%;
+  overflow:hidden;
+}   
+       .motto{
+           margin: 30px 0 0px 30px;
+           font-family: 'Arial black', sans-serif;
+           font-size:1.2em;
+           color: white;    
+       }
+       #coding{
+           font-size:0.6em;
+           color: yellow;
+           margin-top: -0.3px;
+       }
+      
+.global {
+    display: flex;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 26px;
+    height: 50px;
+    margin-top: 10px;
+    padding: 0 10px 1px;
+    cursor: pointer;
+    white-space: nowrap;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+    </style>
+</head>
+<body>
+    <div>
+        <div class="motto">We, The Senior GW Members, are <u><em>not old</em></u>,<br>for we're independent, curious, and mobile!<br>Let's get fingures crossed for the happy new year.<br><br> From Jeonghee Park
+           <br><p id=coding>저는 웹사이트 코딩을 배우고 있습니다.<br>010-9863-1477</p></div>
+    </div>
+    </div>
+    
+    <canvas></canvas>
+
+    <script>
+    
+        var t = 0;
+        var c = document.querySelector("canvas");     
+        var $ = c.getContext('2d');
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+        $.fillStyle = 'hsla(0,0%,0%,1)';
+
+        window.addEventListener('resize', function() {
+          c.width = window.innerWidth;
+          c.height = window.innerHeight;
+        }, false);
+
+        function draw() {
+          $.globalCompositeOperation = 'source-over';
+          $.fillStyle = 'hsla(0,0%,0%,.1)';
+          $.fillRect(0, 0, c.width, c.height);
+          var foo, i, j, r;
+          foo = Math.sin(t) * 2 * Math.PI;
+          for (i=0; i<400; ++i) {
+            r = 400 * Math.sin(i * foo);
+            $.globalCompositeOperation = '';
+            $.fillStyle = 'hsla(' + i + 12 + ',100%, 60%,1)';
+            $.beginPath();
+            $.arc(Math.sin(i) * r + (c.width / 2), 
+                  Math.cos(i) * r + (c.height / 2), 
+                  1.5, 0, Math.PI * 2);
+            $.fill();
+
+          }
+          t += 0.000005;
+          return t %= 2 * Math.PI;
+
+        };
+
+        function run() {
+          window.requestAnimationFrame(run);
+          draw();
+        }
+        run();
+    </script>
+</body>
+</html>
